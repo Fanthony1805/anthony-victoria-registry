@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{background:var(--bg,#FBF7F2);color:var(--ink,#3A332E);font-family:'Jost',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+    ::selection{background:var(--accent-soft,#E7C9C4);color:var(--ink,#3A332E);}
+    image-slot{--isl-bg:var(--panel-2,#f1ebe3);}
+    @keyframes avFadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
+    @keyframes avFadeSoft{from{opacity:0;}to{opacity:1;}}
+    @keyframes avCue{0%{transform:translateY(0);opacity:.5;}50%{transform:translateY(8px);opacity:1;}100%{transform:translateY(0);opacity:.5;}}
+  </style>
+  <script src="./image-slot.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:var(--bg,#FBF7F2);color:var(--ink,#3A332E);font-family:'Jost',sans-serif;overflow-x:hidden;">
+
+  <div style="position:fixed;top:18px;right:18px;z-index:80;display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(253,250,246,0.9);backdrop-filter:blur(10px);border:1px solid var(--line,rgba(58,51,46,0.12));box-shadow:0 10px 30px -14px rgba(40,30,25,0.35);">
+    <button onClick="{{ onEn }}" style="padding:7px 13px;border-radius:999px;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;cursor:pointer;transition:all .3s;background:{{ enBg }};color:{{ enColor }};">EN</button>
+    <button onClick="{{ onFr }}" style="padding:7px 13px;border-radius:999px;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;cursor:pointer;transition:all .3s;background:{{ frBg }};color:{{ frColor }};">FR</button>
+    <button onClick="{{ onNl }}" style="padding:7px 13px;border-radius:999px;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;cursor:pointer;transition:all .3s;background:{{ nlBg }};color:{{ nlColor }};">NL</button>
+  </div>
+
+  <section style="position:relative;height:90vh;min-height:580px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;">
+    <image-slot id="av-hero-photo" style="position:absolute;inset:0;width:100%;height:100%;" shape="rect" placeholder="{{ t.dropHero }}"></image-slot>
+    <div style="position:absolute;inset:0;z-index:1;background:var(--hero-grad,linear-gradient(180deg,rgba(40,30,28,0.30),rgba(40,30,28,0.46)));pointer-events:none;"></div>
+    <div style="position:relative;z-index:2;padding:26px;max-width:820px;pointer-events:none;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px;">
+        <span style="width:34px;height:1px;background:rgba(255,255,255,0.55);"></span>
+        <span style="font-size:12px;letter-spacing:0.34em;text-transform:uppercase;color:rgba(255,255,255,0.92);">{{ t.heroEyebrow }}</span>
+        <span style="width:34px;height:1px;background:rgba(255,255,255,0.55);"></span>
+      </div>
+      <h1 style="margin:0;font-family:var(--head,'Cormorant Garamond',serif);font-weight:500;font-size:clamp(56px,11vw,148px);line-height:0.96;letter-spacing:-0.01em;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,0.28);">Anthony <span style="font-style:italic;font-weight:400;">&amp;</span> Victoria</h1>
+      <p style="max-width:558px;margin:30px auto 0;color:rgba(255,255,255,0.93);font-size:clamp(15px,1.5vw,18px);line-height:1.75;font-weight:300;">{{ t.welcome }}</p>
+    </div>
+    <div style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;">
+      <span style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7);">{{ t.scroll }}</span>
+      <span style="width:1px;height:34px;background:rgba(255,255,255,0.55);animation:avCue 2.4s ease-in-out infinite;"></span>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(58px,8vw,112px) 24px 6px;text-align:center;">
+    <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold,#B79155);margin-bottom:20px;animation:avFadeUp linear both;animation-timeline:view();animation-range:entry 4% cover 22%;">{{ t.registryEyebrow }}</div>
+    <h2 style="margin:0;font-family:var(--head,'Cormorant Garamond',serif);font-weight:500;font-size:clamp(36px,5vw,64px);line-height:1.04;animation:avFadeUp linear both;animation-timeline:view();animation-range:entry 6% cover 24%;">{{ t.registryTitle }}</h2>
+    <p style="max-width:560px;margin:22px auto 0;color:var(--muted,#8C8077);font-size:16px;line-height:1.8;font-weight:300;animation:avFadeUp linear both;animation-timeline:view();animation-range:entry 8% cover 26%;">{{ t.registryIntro }}</p>
+
+    <div style="max-width:680px;margin:44px auto 0;animation:avFadeUp linear both;animation-timeline:view();animation-range:entry 8% cover 30%;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;">
+        <span style="font-family:var(--head,'Cormorant Garamond',serif);font-size:26px;">{{ reserved }}<span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.04em;color:var(--muted,#8C8077);font-weight:300;">{{ reservedSuffix }}</span></span>
+        <span style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold,#B79155);">{{ progressPct }}%</span>
+      </div>
+      <div style="margin-top:14px;height:6px;border-radius:999px;background:var(--panel-2,#f1ebe3);border:1px solid var(--line,rgba(58,51,46,0.12));overflow:hidden;">
+        <div style="height:100%;width:{{ progressWidth }};background:linear-gradient(90deg,var(--gold,#B79155),var(--accent,#C0857F));border-radius:999px;transition:width .7s cubic-bezier(.2,.7,.2,1);"></div>
+      </div>
+      <div style="margin-top:22px;display:flex;justify-content:center;">
+        <button onClick="{{ toggleHide }}" style="display:inline-flex;align-items:center;gap:9px;padding:9px 18px;border-radius:999px;border:1px solid {{ hideBtnBorder }};font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all .3s;background:{{ hideBtnBg }};color:{{ hideBtnColor }};">
+          <span style="width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;"></span>{{ hideLabel }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(34px,5vw,56px) 24px 90px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(20px,2.5vw,34px);">
+      <sc-for list="{{ visibleGifts }}" as="g" hint-placeholder-count="9">
+        <div style="position:relative;background:var(--panel,#fff);border:1px solid var(--line,rgba(58,51,46,0.12));border-radius:var(--radius,16px);overflow:hidden;box-shadow:var(--shadow,0 18px 50px -28px rgba(60,40,35,0.45));display:flex;flex-direction:column;transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;animation:avFadeUp linear both;animation-timeline:view();animation-range:entry 2% cover 20%;" style-hover="transform:translateY(-7px);box-shadow:0 34px 64px -34px rgba(50,35,30,0.55);">
+          <div style="position:relative;">
+            <image-slot id="av-gift-{{ g.id }}" style="display:block;width:100%;height:236px;" shape="rect" fit="contain" placeholder="{{ g.placeholder }}"></image-slot>
+            <sc-if value="{{ g.purchased }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:14px;left:14px;z-index:3;display:inline-flex;align-items:center;gap:7px;background:var(--panel,#fff);color:var(--accent,#C0857F);border:1px solid var(--accent,#C0857F);padding:6px 12px;border-radius:999px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;box-shadow:0 6px 18px -10px rgba(0,0,0,0.3);">✓ {{ t.reservedTag }}</div>
+            </sc-if>
+          </div>
+          <div style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:14px;flex:1;">
+            <div>
+              <div contentEditable="true" suppressContentEditableWarning="true" spellCheck="false" onBlur="{{ g.onEdit }}" style="font-family:var(--head,'Cormorant Garamond',serif);font-weight:500;font-size:25px;line-height:1.15;outline:none;cursor:text;" style-focus="color:var(--accent,#C0857F);">{{ g.name }}</div>
+              <div style="width:30px;height:1px;background:var(--gold,#B79155);margin-top:12px;"></div>
+            </div>
+            <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <a href="{{ g.url }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink,#3A332E);text-decoration:none;border-bottom:1px solid var(--gold,#B79155);padding-bottom:4px;transition:gap .3s,color .3s;" style-hover="gap:13px;color:var(--accent,#C0857F);">{{ t.viewGift }} →</a>
+              <button onClick="{{ g.onToggle }}" style="display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;background:{{ g.toggleBg }};color:{{ g.toggleColor }};border:1px solid {{ g.toggleBorder }};">
+                <span style="width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;"></span>{{ g.toggleLabel }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background:var(--panel-2,#f1ebe3);border-top:1px solid var(--line,rgba(58,51,46,0.12));border-bottom:1px solid var(--line,rgba(58,51,46,0.12));padding:clamp(62px,8vw,116px) 24px;text-align:center;">
+    <div style="max-width:620px;margin:0 auto;animation:avFadeUp linear both;animation-timeline:view();animation-range:entry 4% cover 26%;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:28px;">
+        <span style="width:54px;height:1px;background:var(--line,rgba(58,51,46,0.2));"></span>
+        <span style="position:relative;width:46px;height:26px;display:inline-block;">
+          <span style="position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--gold,#B79155);"></span>
+          <span style="position:absolute;right:0;top:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--accent,#C0857F);"></span>
+        </span>
+        <span style="width:54px;height:1px;background:var(--line,rgba(58,51,46,0.2));"></span>
+      </div>
+      <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold,#B79155);margin-bottom:16px;">{{ t.fundEyebrow }}</div>
+      <h3 style="margin:0;font-family:var(--head,'Cormorant Garamond',serif);font-weight:500;font-size:clamp(32px,4.5vw,54px);line-height:1.06;">{{ t.fundTitle }}</h3>
+      <p style="max-width:500px;margin:20px auto 30px;color:var(--muted,#8C8077);font-size:16px;line-height:1.8;font-weight:300;">{{ t.fundText }}</p>
+      <a href="https://www.leetchi.com/fr/c/anthony-and-victorias-wedding-1881632" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:999px;background:var(--accent,#C0857F);color:#fff;text-decoration:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;transition:gap .3s,opacity .3s;" style-hover="gap:14px;opacity:0.9;">{{ t.fundCta }} →</a>
+    </div>
+  </section>
+
+  <footer style="text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:30px;">
+      <span style="width:54px;height:1px;background:var(--line,rgba(58,51,46,0.2));"></span>
+      <span style="position:relative;width:46px;height:26px;display:inline-block;">
+        <span style="position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--gold,#B79155);"></span>
+        <span style="position:absolute;right:0;top:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--accent,#C0857F);"></span>
+      </span>
+      <span style="width:54px;height:1px;background:var(--line,rgba(58,51,46,0.2));"></span>
+    </div>
+    <div style="font-size:12px;letter-spacing:0.26em;text-transform:uppercase;color:var(--muted,#8C8077);margin-bottom:14px;">{{ t.withLove }}</div>
+    <div style="font-family:var(--head,'Cormorant Garamond',serif);font-weight:500;font-size:clamp(40px,6vw,76px);line-height:1;">Anthony <span style="font-style:italic;font-weight:400;">&amp;</span> Victoria</div>
+    <div style="margin-top:18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold,#B79155);">{{ t.footerDate }}</div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.GIFTS = [
+      { id: 1,  url: 'https://amzn.eu/d/0cWaaJk1', names: { fr: 'Multicuiseur rétro', en: 'Retro multicooker', nl: 'Retro multicooker' } },
+      { id: 2,  url: 'https://amzn.eu/d/00xs6xpZ', names: { fr: 'Machine à expresso SMEG', en: 'SMEG espresso machine', nl: 'SMEG espressomachine' } },
+      { id: 3,  url: 'https://amzn.eu/d/0ipJJ4vn', names: { fr: 'Bloc à couteaux SMEG', en: 'SMEG knife block', nl: 'SMEG messenblok' } },
+      { id: 4,  url: 'https://amzn.eu/d/07yTNYde', names: { fr: 'Aspirateur balai sans fil', en: 'Cordless stick vacuum', nl: 'Draadloze steelstofzuiger' } },
+      { id: 5,  url: 'https://amzn.eu/d/06Q6n2Hn', names: { fr: 'Colonne de rangement en bambou', en: 'Bamboo storage column', nl: 'Bamboe opbergkast' } },
+      { id: 6,  url: 'https://amzn.eu/d/06oVz8Bd', names: { fr: 'Robot pâtissier SMEG', en: 'SMEG stand mixer', nl: 'SMEG keukenmachine' } },
+      { id: 7,  url: 'https://amzn.eu/d/0aIBiVQp', names: { fr: 'Blender portable SMEG', en: 'SMEG personal blender', nl: 'SMEG blender to go' } },
+      { id: 8,  url: 'https://amzn.eu/d/0gkpfTIX', names: { fr: 'Mixeur plongeant SMEG', en: 'SMEG hand blender', nl: 'SMEG staafmixer' } },
+      { id: 9,  url: 'https://amzn.eu/d/01iO40Ys', names: { fr: 'Friteuse à air Ninja', en: 'Ninja air fryer', nl: 'Ninja airfryer' } },
+      { id: 10, url: 'https://amzn.eu/d/02A9H7AP', names: { fr: 'Friteuse nomade Ninja Crispi', en: 'Ninja Crispi portable air fryer', nl: 'Ninja Crispi draagbare airfryer' } },
+      { id: 11, url: 'https://amzn.eu/d/0ekW3Cau', names: { fr: 'Ustensiles en bois — 10 pièces', en: 'Wooden utensils — 10 pieces', nl: 'Houten keukengerei — 10-delig' } },
+      { id: 12, url: 'https://amzn.eu/d/0aFLkSdz', names: { fr: 'Store brise-vue rétractable', en: 'Retractable side awning', nl: 'Uitschuifbaar windscherm' } }
+    ];
+    this.STRINGS = {
+      en: {
+        heroEyebrow: 'Summer 2026 · Wedding Registry',
+        welcome: 'Thank you for being part of our story. Every gift on this list has been chosen with care — your generosity means the world to us.',
+        dropHero: 'Drop your couple photo here',
+        scroll: 'Scroll',
+        registryEyebrow: 'The Registry',
+        registryTitle: 'Chosen with care',
+        registryIntro: 'A few things we are dreaming of for our new life together. There is no obligation at all — your presence is the greatest gift of all.',
+        reservedSuffix: ' of {n} gifts reserved',
+        hide: 'Hide reserved gifts',
+        showAll: 'Show all gifts',
+        viewGift: 'View Gift',
+        mark: 'Mark as purchased',
+        reservedTag: 'Reserved',
+        dropGift: 'Drop a photo of gift ',
+        fundEyebrow: 'Beyond the registry',
+        fundTitle: 'Toward our honeymoon',
+        fundText: 'If you would rather help us chase sunsets somewhere far away, a contribution to our honeymoon fund would mean the world to us.',
+        fundCta: 'Contribute to our honeymoon',
+        withLove: 'With all our love,',
+        footerDate: 'Summer 2026'
+      },
+      fr: {
+        heroEyebrow: 'Été 2026 · Liste de mariage',
+        welcome: 'Merci de faire partie de notre histoire. Chaque cadeau de cette liste a été choisi avec soin — votre générosité nous touche énormément.',
+        dropHero: 'Déposez votre photo de couple ici',
+        scroll: 'Défiler',
+        registryEyebrow: 'La liste',
+        registryTitle: 'Choisis avec soin',
+        registryIntro: 'Quelques envies pour notre nouvelle vie à deux. Aucune obligation — votre présence est le plus beau des cadeaux.',
+        reservedSuffix: ' sur {n} cadeaux réservés',
+        hide: 'Masquer les cadeaux réservés',
+        showAll: 'Afficher tous les cadeaux',
+        viewGift: 'Voir le cadeau',
+        mark: 'Marquer comme acheté',
+        reservedTag: 'Réservé',
+        dropGift: 'Déposez une photo du cadeau ',
+        fundEyebrow: 'Au-delà de la liste',
+        fundTitle: 'Pour notre voyage de noces',
+        fundText: 'Si vous préférez nous aider à partir chasser les couchers de soleil à l’autre bout du monde, une participation à notre cagnotte de voyage de noces nous comblerait.',
+        fundCta: 'Participer à la cagnotte',
+        withLove: 'Avec tout notre amour,',
+        footerDate: 'Été 2026'
+      },
+      nl: {
+        heroEyebrow: 'Zomer 2026 · Huwelijkslijst',
+        welcome: 'Dank je wel dat je deel uitmaakt van ons verhaal. Elk cadeau op deze lijst is met zorg gekozen — jullie vrijgevigheid betekent ontzettend veel voor ons.',
+        dropHero: 'Sleep hier jullie foto naartoe',
+        scroll: 'Scroll',
+        registryEyebrow: 'De lijst',
+        registryTitle: 'Met zorg gekozen',
+        registryIntro: 'Een paar dromen voor ons nieuwe leven samen. Niets is verplicht — jullie aanwezigheid is het mooiste geschenk.',
+        reservedSuffix: ' van {n} cadeaus gereserveerd',
+        hide: 'Verberg gereserveerde cadeaus',
+        showAll: 'Toon alle cadeaus',
+        viewGift: 'Bekijk cadeau',
+        mark: 'Markeer als gekocht',
+        reservedTag: 'Gereserveerd',
+        dropGift: 'Sleep hier een foto van cadeau ',
+        fundEyebrow: 'Naast de lijst',
+        fundTitle: 'Voor onze huwelijksreis',
+        fundText: 'Help je ons liever om ver weg zonsondergangen na te jagen? Een bijdrage aan onze huwelijksreis zou de wereld voor ons betekenen.',
+        fundCta: 'Draag bij aan onze huwelijksreis',
+        withLove: 'Met al onze liefde,',
+        footerDate: 'Zomer 2026'
+      }
+    };
+    this.THEMES = {
+      blush: {
+        '--bg': '#FBF7F2', '--panel': '#FFFFFF', '--panel-2': '#FAF3EC',
+        '--ink': '#3A332E', '--muted': '#8C8077', '--accent': '#C0857F', '--accent-soft': '#E7C9C4',
+        '--gold': '#B79155', '--line': 'rgba(58,51,46,0.12)', '--radius': '16px',
+        '--head': "'Cormorant Garamond', serif",
+        '--hero-grad': 'linear-gradient(180deg, rgba(46,32,30,0.26), rgba(46,32,30,0.46))',
+        '--shadow': '0 18px 50px -28px rgba(60,40,35,0.45)'
+      },
+      midnight: {
+        '--bg': '#1C181A', '--panel': '#271F22', '--panel-2': '#2C2327',
+        '--ink': '#F1E8DF', '--muted': '#A99B90', '--accent': '#CE938D', '--accent-soft': '#5A3F3F',
+        '--gold': '#CBA46A', '--line': 'rgba(241,232,223,0.14)', '--radius': '10px',
+        '--head': "'Playfair Display', serif",
+        '--hero-grad': 'linear-gradient(180deg, rgba(12,9,11,0.42), rgba(12,9,11,0.68))',
+        '--shadow': '0 26px 60px -30px rgba(0,0,0,0.72)'
+      },
+      atelier: {
+        '--bg': '#F6F2EC', '--panel': '#FFFFFF', '--panel-2': '#EFE8DF',
+        '--ink': '#221F1B', '--muted': '#8A8175', '--accent': '#B0897F', '--accent-soft': '#E3D6CE',
+        '--gold': '#A4894F', '--line': 'rgba(34,31,27,0.16)', '--radius': '0px',
+        '--head': "'Playfair Display', serif",
+        '--hero-grad': 'linear-gradient(180deg, rgba(25,22,18,0.20), rgba(25,22,18,0.40))',
+        '--shadow': '0 16px 42px -30px rgba(40,35,28,0.4)'
+      }
+    };
+    let purchased = {}, names = {};
+    try { purchased = JSON.parse(localStorage.getItem('av-registry-purchased')) || {}; } catch (e) {}
+    try { names = JSON.parse(localStorage.getItem('av-registry-names')) || {}; } catch (e) {}
+    // Discard stale "Gift No. XX" placeholders accidentally saved as edits,
+    // so the real product-name defaults show through. Keep intentional renames.
+    Object.keys(names).forEach(k => {
+      if (/^Gift No\.?\s*\d+$/i.test(String(names[k]).trim())) delete names[k];
+    });
+    let lang = 'fr';
+    try { lang = localStorage.getItem('av-registry-lang') || 'fr'; } catch (e) {}
+    if (['en', 'fr', 'nl'].indexOf(lang) < 0) lang = 'fr';
+    this.state = { purchased, names, hideReserved: false, lang };
+  }
+
+  componentDidMount() { this.applyTheme('blush'); }
+
+  applyTheme(name) {
+    const t = this.THEMES[name] || this.THEMES.blush;
+    const r = document.documentElement;
+    Object.keys(t).forEach(k => r.style.setProperty(k, t[k]));
+  }
+
+  togglePurchased = (id) => {
+    this.setState(s => {
+      const p = Object.assign({}, s.purchased);
+      if (p[id]) delete p[id]; else p[id] = true;
+      try { localStorage.setItem('av-registry-purchased', JSON.stringify(p)); } catch (e) {}
+      return { purchased: p };
+    });
+  };
+
+  toggleHide = () => { this.setState(s => ({ hideReserved: !s.hideReserved })); };
+
+  setLang = (l) => {
+    try { localStorage.setItem('av-registry-lang', l); } catch (e) {}
+    this.setState({ lang: l });
+  };
+
+  editName = (id, text) => {
+    this.setState(s => {
+      const n = Object.assign({}, s.names);
+      const v = (text || '').trim();
+      if (v) n[id] = v; else delete n[id];
+      try { localStorage.setItem('av-registry-names', JSON.stringify(n)); } catch (e) {}
+      return { names: n };
+    });
+  };
+
+  renderVals() {
+    const pad = (n) => (n < 10 ? '0' + n : '' + n);
+    const total = this.GIFTS.length;
+    const lang = this.state.lang;
+    const T = this.STRINGS[lang] || this.STRINGS.fr;
+    const gifts = this.GIFTS.map((g, i) => {
+      const purchased = !!this.state.purchased[g.id];
+      const name = this.state.names[g.id] || (g.names && g.names[lang]) || (g.names && g.names.fr) || ('Gift No. ' + pad(i + 1));
+      return {
+        id: g.id, url: g.url, name,
+        placeholder: T.dropGift + pad(i + 1),
+        purchased,
+        toggleLabel: purchased ? T.reservedTag : T.mark,
+        toggleBg: purchased ? 'var(--accent)' : 'transparent',
+        toggleColor: purchased ? '#fff' : 'var(--muted)',
+        toggleBorder: purchased ? 'var(--accent)' : 'var(--line)',
+        onToggle: () => this.togglePurchased(g.id),
+        onEdit: (e) => this.editName(g.id, e && e.target ? e.target.textContent : '')
+      };
+    });
+    const reserved = gifts.filter(g => g.purchased).length;
+    const visibleGifts = this.state.hideReserved ? gifts.filter(g => !g.purchased) : gifts;
+    const pct = total ? Math.round((reserved / total) * 100) : 0;
+    const hide = this.state.hideReserved;
+    return {
+      gifts, visibleGifts, total, reserved,
+      progressPct: pct, progressWidth: pct + '%',
+      t: T, lang,
+      reservedSuffix: T.reservedSuffix.replace('{n}', total),
+      hideLabel: hide ? T.showAll : T.hide,
+      hideBtnBg: hide ? 'var(--accent)' : 'transparent',
+      hideBtnColor: hide ? '#fff' : 'var(--muted)',
+      hideBtnBorder: hide ? 'var(--accent)' : 'var(--line)',
+      toggleHide: this.toggleHide,
+      onEn: () => this.setLang('en'),
+      onFr: () => this.setLang('fr'),
+      onNl: () => this.setLang('nl'),
+      enBg: lang === 'en' ? 'var(--accent)' : 'transparent',
+      enColor: lang === 'en' ? '#fff' : 'var(--muted)',
+      frBg: lang === 'fr' ? 'var(--accent)' : 'transparent',
+      frColor: lang === 'fr' ? '#fff' : 'var(--muted)',
+      nlBg: lang === 'nl' ? 'var(--accent)' : 'transparent',
+      nlColor: lang === 'nl' ? '#fff' : 'var(--muted)'
+    };
+  }
+}
+</script>
+</body>
+</html>
