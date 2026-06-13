@@ -137,8 +137,13 @@ footer{text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;}
 .gift-placeholder + * { display: none; }
 
 
-.redirect-toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:#3A332E;color:#FBF7F2;padding:14px 22px;border-radius:12px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.04em;text-align:center;max-width:380px;width:calc(100% - 48px);box-shadow:0 8px 32px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;}
-.redirect-toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.redirect-popup-overlay{position:fixed;inset:0;z-index:500;background:rgba(40,30,28,0.5);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.redirect-popup-overlay.show{opacity:1;pointer-events:auto;}
+.redirect-popup{background:#FBF7F2;border-radius:20px;padding:36px 32px;max-width:380px;width:100%;text-align:center;box-shadow:0 24px 60px -20px rgba(40,30,28,0.45);}
+.redirect-popup-icon{font-size:32px;margin-bottom:16px;}
+.redirect-popup-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:#3A332E;margin-bottom:12px;}
+.redirect-popup-text{font-family:'Jost',sans-serif;font-size:14px;color:#5A4E47;line-height:1.6;margin-bottom:24px;}
+.redirect-popup-countdown{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#B79155;}
 </style>
 </head>
 <body>
@@ -439,23 +444,40 @@ function initReveal(){
 
 buildGrid();applyLang();loadPurchases();initReveal();
 
-let toastTimer = null;
+let redirectWin = null, redirectCountdownInterval = null;
 function handleViewGift(e, url) {
   e.preventDefault();
-  // Open blank tab now (user gesture = no popup block), redirect after delay
-  const win = window.open('', '_blank', 'noopener');
-  win.document.write('<html><body style="background:#FBF7F2;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;color:#3A332E;font-size:14px;letter-spacing:.05em">Chargement…</body></html>');
-  const t = document.getElementById('redirect-toast');
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    win.location.href = url;
-    t.classList.remove('show');
-  }, 5000);
+  // Open blank tab immediately (user gesture) to avoid popup blockers
+  redirectWin = window.open('', '_blank', 'noopener');
+  redirectWin.document.write('<html><body style="background:#FBF7F2;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;color:#8C8077;font-size:13px;letter-spacing:.08em">Chargement…</body></html>');
+  // Show popup with countdown
+  const overlay = document.getElementById('redirect-overlay');
+  const countdown = document.getElementById('redirect-countdown');
+  overlay.classList.add('show');
+  let secs = 5;
+  countdown.textContent = `Redirection dans ${secs} secondes…`;
+  clearInterval(redirectCountdownInterval);
+  redirectCountdownInterval = setInterval(() => {
+    secs--;
+    if (secs <= 0) {
+      clearInterval(redirectCountdownInterval);
+      overlay.classList.remove('show');
+      redirectWin.location.href = url;
+    } else {
+      countdown.textContent = `Redirection dans ${secs} seconde${secs > 1 ? 's' : ''}…`;
+    }
+  }, 1000);
   return false;
 }
 </script>
 
-<div class="redirect-toast" id="redirect-toast">💌 Pensez à revenir sur ce site pour indiquer que vous avez réservé ce cadeau !</div>
+<div class="redirect-popup-overlay" id="redirect-overlay">
+  <div class="redirect-popup">
+    <div class="redirect-popup-icon">💌</div>
+    <div class="redirect-popup-title">Avant de partir sur Amazon…</div>
+    <div class="redirect-popup-text">Pensez à revenir sur ce site pour indiquer que vous avez réservé ce cadeau, afin que les autres invités sachent qu'il est pris !</div>
+    <div class="redirect-popup-countdown" id="redirect-countdown">Redirection dans 5 secondes…</div>
+  </div>
+</div>
 </body>
 </html>
