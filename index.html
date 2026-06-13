@@ -419,7 +419,7 @@ function buildGrid(){
           <div class="gift-buyer"></div>
         </div>
         <div class="gift-actions">
-          <a class="view-link" href="${g.url}" target="_blank" rel="noopener noreferrer" onclick="showRedirectToast()">
+          <a class="view-link" href="${g.url}" target="_blank" rel="noopener noreferrer" onclick="return handleViewGift(event, this.href)">
             <span class="link-text">Voir le cadeau</span> →
           </a>
           <button class="toggle-btn" onclick="openModal(${g.id})">
@@ -440,11 +440,19 @@ function initReveal(){
 buildGrid();applyLang();loadPurchases();initReveal();
 
 let toastTimer = null;
-function showRedirectToast() {
+function handleViewGift(e, url) {
+  e.preventDefault();
+  // Open blank tab now (user gesture = no popup block), redirect after delay
+  const win = window.open('', '_blank', 'noopener');
+  win.document.write('<html><body style="background:#FBF7F2;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;color:#3A332E;font-size:14px;letter-spacing:.05em">Chargement…</body></html>');
   const t = document.getElementById('redirect-toast');
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 5000);
+  toastTimer = setTimeout(() => {
+    win.location.href = url;
+    t.classList.remove('show');
+  }, 5000);
+  return false;
 }
 </script>
 
