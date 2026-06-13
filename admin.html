@@ -71,7 +71,10 @@ tr:hover td{background:#FDFAF6;}
       <div class="header-title">Anthony <em style="font-style:italic;font-weight:400;">&amp;</em> Victoria</div>
       <div class="header-sub">Tableau de bord — Liste de mariage</div>
     </div>
-    <a href="/" class="back-link">← Voir le site</a>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="/" class="back-link">← Voir le site</a>
+      <button onclick="resetDB()" style="padding:8px 16px;border-radius:999px;background:transparent;border:1px solid #C0857F;color:#C0857F;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;" id="reset-btn">Réinitialiser la DB</button>
+    </div>
   </div>
 
   <div style="padding:32px;">
@@ -102,6 +105,25 @@ const GIFT_NAMES = {
 const TOTAL = 22;
 
 let adminPwd = '';
+
+async function resetDB() {
+  if (!confirm('Supprimer toutes les réservations ? Cette action est irréversible.')) return;
+  const btn = document.getElementById('reset-btn');
+  btn.textContent = 'Suppression…';
+  btn.disabled = true;
+  const res = await fetch('/api/reset-db', {
+    method: 'POST',
+    headers: { 'x-admin-password': adminPwd },
+  });
+  if (res.ok) {
+    btn.textContent = 'Réinitialiser la DB';
+    btn.disabled = false;
+    loadData();
+  } else {
+    btn.textContent = 'Erreur';
+    btn.disabled = false;
+  }
+}
 
 function doLogin() {
   const v = document.getElementById('pwd-input').value;

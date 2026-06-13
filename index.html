@@ -135,6 +135,9 @@ footer{text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;}
 /* Show overlay on placeholder items always (no hover needed) */
 .gift-placeholder + * { display: none; }
 
+
+.redirect-toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:#3A332E;color:#FBF7F2;padding:14px 22px;border-radius:12px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.04em;text-align:center;max-width:380px;width:calc(100% - 48px);box-shadow:0 8px 32px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;}
+.redirect-toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
 </style>
 </head>
 <body>
@@ -415,7 +418,7 @@ function buildGrid(){
           <div class="gift-buyer"></div>
         </div>
         <div class="gift-actions">
-          <a class="view-link" href="${g.url}" target="_blank" rel="noopener noreferrer">
+          <a class="view-link" href="${g.url}" target="_blank" rel="noopener noreferrer" onclick="showRedirectToast()">
             <span class="link-text">Voir le cadeau</span> →
           </a>
           <button class="toggle-btn" onclick="openModal(${g.id})">
@@ -434,6 +437,16 @@ function initReveal(){
 }
 
 buildGrid();applyLang();loadPurchases();initReveal();
+
+let toastTimer = null;
+function showRedirectToast() {
+  const t = document.getElementById('redirect-toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 5000);
+}
 </script>
+
+<div class="redirect-toast" id="redirect-toast">💌 Pensez à revenir sur ce site pour indiquer que vous avez réservé ce cadeau !</div>
 </body>
 </html>
