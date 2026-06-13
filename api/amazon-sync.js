@@ -25,11 +25,11 @@ const ASIN_TO_GIFT_ID = {
 
   'B07BQTLPQP': 16, // Measuring cups
   'B0BBGQ2GLZ': 17, // Wood utensils
-  'B0C5M8MVGM': 18, // Dreame R10
   'B0GCF4J7TD': 23, // Outsunny shed
   'B0GSX75W2D': 24, // Maison Zayt board
   'B00JT8ZYCS': 25, // TECHEF grill pan
   'B0B69D6RV4': 26, // Rotel fondue
+  'B00UMW7I6A': 27, // Casaria storage box
   'B0BYMQTBMB': 19, // SMEG blender
   'B0BYMSXD2L': 20, // SMEG espresso
   'B07L8CQVQP': 21, // SMEG mixer
