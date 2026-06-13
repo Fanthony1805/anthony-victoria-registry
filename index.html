@@ -117,6 +117,25 @@ footer{text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;}
   .reveal.visible{opacity:1;transform:none;}
 }
 .gift-card.hidden-card{display:none;}
+/* Per-card photo upload */
+.gift-img-wrap { cursor: pointer; }
+.gift-img-wrap:hover .upload-overlay { opacity: 1; }
+.upload-overlay {
+  position: absolute; inset: 0; z-index: 4;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; background: rgba(251,247,242,0.88); backdrop-filter: blur(2px);
+  opacity: 0; transition: opacity .2s; cursor: pointer;
+}
+.gift-card.purchased .gift-img-wrap:hover .upload-overlay { opacity: 0; pointer-events: none; }
+.upload-overlay svg { opacity: .5; }
+.upload-overlay span {
+  font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #8C8077;
+}
+.gift-img-wrap input[type=file] { display: none; }
+/* Show overlay on placeholder items always (no hover needed) */
+.gift-placeholder + * { display: none; }
+
 </style>
 </head>
 <body>
@@ -328,11 +347,57 @@ async function submitPurchase(){
   }
 }
 
+// Load user-uploaded images from localStorage
+function getUserImg(id) {
+  try { return localStorage.getItem('av-img-' + id) || ''; } catch(e) { return ''; }
+}
+function saveUserImg(id, dataUrl) {
+  try { localStorage.setItem('av-img-' + id, dataUrl); } catch(e) {}
+}
+
+
+function handleImgUpload(giftId, input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    // Downscale to max 800px to keep localStorage light
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 800;
+      const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      const dataUrl = canvas.toDataURL('image/webp', 0.82);
+      saveUserImg(giftId, dataUrl);
+      // Update the card image immediately
+      const card = document.querySelector(`.gift-card[data-id="${giftId}"]`);
+      if (!card) return;
+      const wrap = card.querySelector('.gift-img-wrap');
+      let el = wrap.querySelector('.gift-img, .gift-placeholder');
+      if (el && el.classList.contains('gift-placeholder')) {
+        const newImg = document.createElement('img');
+        newImg.className = 'gift-img';
+        newImg.src = dataUrl;
+        wrap.replaceChild(newImg, el);
+      } else if (el) {
+        el.src = dataUrl;
+      }
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
 function buildGrid(){
   const grid=document.getElementById('gift-grid');
   grid.innerHTML='';
   GIFTS.forEach((g)=>{
-    const imgSrc=IMAGES[g.id]||'';
+    const builtIn = IMAGES[g.id] || '';
+    const userImg = getUserImg(g.id);
+    const imgSrc = userImg || builtIn;
     const card=document.createElement('div');
     card.className='gift-card reveal';card.dataset.id=g.id;
     const imgHtml=imgSrc
@@ -341,6 +406,11 @@ function buildGrid(){
     card.innerHTML=`
       <div class="gift-img-wrap">
         ${imgHtml}
+        <div class="upload-overlay" onclick="document.getElementById('file-input-${g.id}').click()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B79155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Ajouter une photo</span>
+        </div>
+        <input type="file" id="file-input-${g.id}" accept="image/*" onchange="handleImgUpload(${g.id}, this)">
         <div class="reserved-badge"><span class="badge-text">✓ Réservé</span></div>
       </div>
       <div class="gift-body">
