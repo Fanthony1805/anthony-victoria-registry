@@ -146,6 +146,15 @@ footer{text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;}
 .redirect-popup-countdown{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#B79155;}
 .redirect-go-btn{display:inline-block;margin-top:20px;padding:12px 24px;border-radius:999px;background:#B79155;color:#fff;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
 .redirect-go-btn:hover{opacity:.85;}
+
+/* Photo strip carousel */
+.photo-strip{overflow:hidden;background:#28201D;line-height:0;}
+.photo-strip-track{display:flex;gap:3px;animation:stripScroll 50s linear infinite;width:max-content;}
+.photo-strip-track:hover{animation-play-state:paused;}
+.photo-strip img{height:240px;width:auto;object-fit:cover;flex-shrink:0;display:block;transition:transform .35s ease,filter .35s ease;cursor:pointer;filter:brightness(.92);}
+.photo-strip img:hover{transform:scale(1.04);filter:brightness(1);}
+@keyframes stripScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@media(max-width:600px){.photo-strip img{height:165px;}}
 </style>
 </head>
 <body>
@@ -185,6 +194,9 @@ footer{text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;}
   </div>
   <div class="hero-scroll"><span class="label" data-i18n="scroll"></span><span class="bar"></span></div>
 </section>
+<div class="photo-strip" aria-hidden="true">
+  <div class="photo-strip-track"><img src="photos/img_0.jpg" alt="" loading="lazy"><img src="photos/img_1.jpg" alt="" loading="lazy"><img src="photos/img_2.jpg" alt="" loading="lazy"><img src="photos/img_3.jpg" alt="" loading="lazy"><img src="photos/img_4.jpg" alt="" loading="lazy"><img src="photos/img_5.jpg" alt="" loading="lazy"><img src="photos/casaria.jpg" alt="" loading="lazy"><img src="photos/new_0.jpg" alt="" loading="lazy"><img src="photos/new_1.jpg" alt="" loading="lazy"><img src="photos/new_2.jpg" alt="" loading="lazy"><img src="photos/new_3.jpg" alt="" loading="lazy"><img src="photos/new_4.jpg" alt="" loading="lazy"><img src="photos/new2_0.jpg" alt="" loading="lazy"><img src="photos/new2_1.jpg" alt="" loading="lazy"><img src="photos/new2_2.jpg" alt="" loading="lazy"><img src="photos/new2_3.jpg" alt="" loading="lazy"><img src="photos/vicco_0.jpg" alt="" loading="lazy"><img src="photos/last_0.jpg" alt="" loading="lazy"><img src="photos/img_0.jpg" alt="" loading="lazy"><img src="photos/img_1.jpg" alt="" loading="lazy"><img src="photos/img_2.jpg" alt="" loading="lazy"><img src="photos/img_3.jpg" alt="" loading="lazy"><img src="photos/img_4.jpg" alt="" loading="lazy"><img src="photos/img_5.jpg" alt="" loading="lazy"><img src="photos/casaria.jpg" alt="" loading="lazy"><img src="photos/new_0.jpg" alt="" loading="lazy"><img src="photos/new_1.jpg" alt="" loading="lazy"><img src="photos/new_2.jpg" alt="" loading="lazy"><img src="photos/new_3.jpg" alt="" loading="lazy"><img src="photos/new_4.jpg" alt="" loading="lazy"><img src="photos/new2_0.jpg" alt="" loading="lazy"><img src="photos/new2_1.jpg" alt="" loading="lazy"><img src="photos/new2_2.jpg" alt="" loading="lazy"><img src="photos/new2_3.jpg" alt="" loading="lazy"><img src="photos/vicco_0.jpg" alt="" loading="lazy"><img src="photos/last_0.jpg" alt="" loading="lazy"></div>
+</div>
 
 <section class="registry-head">
   <div class="eyebrow reveal" data-i18n="registryEyebrow"></div>
