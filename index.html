@@ -144,6 +144,8 @@ footer{text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;}
 .redirect-popup-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:#3A332E;margin-bottom:12px;}
 .redirect-popup-text{font-family:'Jost',sans-serif;font-size:14px;color:#5A4E47;line-height:1.6;margin-bottom:24px;}
 .redirect-popup-countdown{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#B79155;}
+.redirect-go-btn{display:inline-block;margin-top:20px;padding:12px 24px;border-radius:999px;background:#B79155;color:#fff;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.redirect-go-btn:hover{opacity:.85;}
 </style>
 </head>
 <body>
@@ -444,15 +446,15 @@ function initReveal(){
 
 buildGrid();applyLang();loadPurchases();initReveal();
 
-let redirectWin = null, redirectCountdownInterval = null;
+let redirectCountdownInterval = null;
 function handleViewGift(e, url) {
   e.preventDefault();
-  // Open blank tab immediately (user gesture) to avoid popup blockers
-  redirectWin = window.open('', '_blank', 'noopener');
-  redirectWin.document.write('<html><body style="background:#FBF7F2;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;color:#8C8077;font-size:13px;letter-spacing:.08em">Chargement…</body></html>');
-  // Show popup with countdown
   const overlay = document.getElementById('redirect-overlay');
   const countdown = document.getElementById('redirect-countdown');
+  const btn = document.getElementById('redirect-go-btn');
+  btn.href = url;
+  btn.style.display = 'none';
+  countdown.style.display = 'block';
   overlay.classList.add('show');
   let secs = 5;
   countdown.textContent = `Redirection dans ${secs} secondes…`;
@@ -461,8 +463,8 @@ function handleViewGift(e, url) {
     secs--;
     if (secs <= 0) {
       clearInterval(redirectCountdownInterval);
-      overlay.classList.remove('show');
-      redirectWin.location.href = url;
+      countdown.style.display = 'none';
+      btn.style.display = 'inline-block';
     } else {
       countdown.textContent = `Redirection dans ${secs} seconde${secs > 1 ? 's' : ''}…`;
     }
@@ -477,6 +479,7 @@ function handleViewGift(e, url) {
     <div class="redirect-popup-title">Avant de partir sur Amazon…</div>
     <div class="redirect-popup-text">Pensez à revenir sur ce site pour indiquer que vous avez réservé ce cadeau, afin que les autres invités sachent qu'il est pris !</div>
     <div class="redirect-popup-countdown" id="redirect-countdown">Redirection dans 5 secondes…</div>
+    <a id="redirect-go-btn" class="redirect-go-btn" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">Voir le cadeau sur Amazon →</a>
   </div>
 </div>
 </body>
