@@ -5,7 +5,8 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'anthony.ferreyrolles@gmail.com';
-const FROM_EMAIL = process.env.FROM_EMAIL || 'registry@anthonyandvictoria.com';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'mariage@aethrion.io';
+const SITE_URL = 'https://wedding-registry-victoria-anthony.aethrion.io';
 
 const GIFT_NAMES = {
   1:'Aspirateur balai Shark',2:'Gants de cuisine KitchenAid',3:'Nettoyeur taches BISSELL',
@@ -81,7 +82,7 @@ export default async function handler(req) {
               ${message ? `<tr><td style="padding:8px 0;color:#8C8077;">Message</td><td style="padding:8px 0;font-style:italic;">"${message}"</td></tr>` : ''}
               <tr><td style="padding:8px 0;color:#8C8077;">Source</td><td style="padding:8px 0;">${source === 'amazon' ? 'Amazon (sync auto)' : 'Site registry'}</td></tr>
             </table>
-            <p style="margin-top:24px;color:#8C8077;font-size:14px;">— Votre liste de mariage Anthony &amp; Victoria</p>
+            <p style="margin-top:24px;color:#8C8077;font-size:14px;">— <a href="${SITE_URL}" style="color:#B79155;">Liste de mariage Anthony &amp; Victoria</a></p>
           </div>`,
       }),
     });
