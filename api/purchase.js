@@ -15,7 +15,8 @@ const GIFT_NAMES = {
   10:'Imprimante étiquettes Phomemo',11:'Friteuse nomade Ninja CRISPi',12:'Store brise-vue rétractable',
   13:'Colonne de rangement 5five',
   16:'Cuillères doseuses 9 pièces',17:'Ustensiles de cuisine en teck — 10 pièces',18:'Aspirateur balai Dreame R10',
-  19:'Blender SMEG',20:'Machine à expresso SMEG',21:'Robot pâtissier SMEG',22:'Bloc à couteaux SMEG'
+  19:'Blender SMEG',20:'Machine à expresso SMEG',21:'Robot pâtissier SMEG',22:'Bloc à couteaux SMEG',
+  23:'Abri de jardin Outsunny',24:'Planche apéritif en bois d\'olivier',25:'Plancha coréenne TECHEF',26:'Service à fondue suisse Rotel'
 };
 
 export default async function handler(req) {
