@@ -1,7 +1,7 @@
 // Vercel Cron — scrapes the public Amazon wishlist every hour,
 // marks newly-purchased items in Supabase and fires a Resend notification.
 // Configure in vercel.json: { "crons": [{ "path": "/api/amazon-sync", "schedule": "0 * * * *" }] }
-export const config = { runtime: 'nodejs20.x' };
+export const config = { runtime: 'nodejs' };
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
