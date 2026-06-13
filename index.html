@@ -473,7 +473,7 @@ function handleViewGift(e, url) {
 }
 </script>
 
-<div class="redirect-popup-overlay" id="redirect-overlay">
+<div class="redirect-popup-overlay" id="redirect-overlay" onclick="if(event.target===this){clearInterval(redirectCountdownInterval);this.classList.remove('show')}">
   <div class="redirect-popup">
     <div class="redirect-popup-icon">💌</div>
     <div class="redirect-popup-title">Avant de partir sur Amazon…</div>
