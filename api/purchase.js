@@ -10,7 +10,7 @@ const SITE_URL = 'https://wedding-registry-victoria-anthony.aethrion.io';
 
 const GIFT_NAMES = {
   1:'Aspirateur balai Shark',2:'Gants de cuisine KitchenAid',3:'Nettoyeur taches BISSELL',
-  4:'Chauffe-plat électrique iTRUSOU',5:'Étagères métalliques CEYIRO (x2)',6:'Rangement chaussures SONGMICS',
+  4:'Chauffe-plat électrique iTRUSOU',5:'Étagères métalliques CEYIRO (x2)',
   7:'Distributeur canettes réfrigérateur',8:'Boîte charcuterie Mepal Modula',9:'Cuiseur à riz vintage',
   10:'Imprimante étiquettes Phomemo',11:'Friteuse nomade Ninja CRISPi',12:'Store brise-vue rétractable',
   13:'Colonne de rangement 5five',14:'Colonne salle de bain HOMCOM',15:'Colonne bambou Vicco Liora',

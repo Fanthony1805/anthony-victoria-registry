@@ -4,5 +4,8 @@
       "path": "/api/amazon-sync",
       "schedule": "0 * * * *"
     }
+  ],
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin.html" }
   ]
 }

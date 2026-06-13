@@ -15,7 +15,6 @@ const ASIN_TO_GIFT_ID = {
   'B0D5DJFDBQ': 3,  // BISSELL
   'B0D1Y42SPM': 4,  // iTRUSOU warmer
   'B0FLY4GN28': 5,  // CEYIRO shelves
-  'B0DSZQLQQD': 6,  // SONGMICS shoes
   'B0FRMCY863': 7,  // Aurinovellia fridge
   'B000MWTI0O': 8,  // Mepal box
   'B08JTRT11D': 9,  // Rice cooker
