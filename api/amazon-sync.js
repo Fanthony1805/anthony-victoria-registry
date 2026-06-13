@@ -22,8 +22,7 @@ const ASIN_TO_GIFT_ID = {
   'B0FF525C1H': 11, // Ninja CRISPi
   'B0DV5HVP1Q': 12, // Blind
   'B0D2WRV187': 13, // 5five column
-  'B0FXRGWR6T': 14, // HOMCOM
-  'B0DWPVK1SD': 15, // Vicco bamboo
+
   'B07BQTLPQP': 16, // Measuring cups
   'B0BBGQ2GLZ': 17, // Wood utensils
   'B0C5M8MVGM': 18, // Dreame R10
