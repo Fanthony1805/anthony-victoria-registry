@@ -96,6 +96,13 @@ body{background:#FBF7F2;color:#3A332E;font-family:'Jost',system-ui,sans-serif;-w
 .modal-cancel:hover{border-color:#C0857F;color:#C0857F;}
 .modal-error{color:#C0857F;font-size:13px;margin-top:10px;display:none;}
 /* Fund section */
+.registry-actions{max-width:1180px;margin:0 auto;padding:0 24px 8px;display:flex;flex-direction:column;align-items:center;gap:20px;}
+.amazon-list-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 34px;border-radius:999px;background:#B79155;color:#fff;text-decoration:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;transition:background .2s,transform .15s;box-shadow:0 6px 22px -8px rgba(183,145,85,0.55);}
+.amazon-list-btn:hover{background:#A37E44;transform:translateY(-2px);}
+.urne-notice{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid rgba(183,145,85,0.28);border-radius:14px;padding:18px 24px;max-width:600px;text-align:left;}
+.urne-icon{font-size:22px;line-height:1;flex-shrink:0;margin-top:1px;}
+.urne-text{font-size:14px;line-height:1.7;color:#5A4E47;font-weight:300;}
+.urne-text strong{font-weight:500;color:#3A332E;}
 .fund-section{background:#FAF3EC;border-top:1px solid rgba(58,51,46,0.12);border-bottom:1px solid rgba(58,51,46,0.12);padding:clamp(62px,8vw,116px) 24px;text-align:center;}
 .rings{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:28px;}
 .rings .line{width:54px;height:1px;background:rgba(58,51,46,0.2);}
@@ -201,6 +208,17 @@ footer{text-align:center;padding:clamp(72px,9vw,132px) 24px 76px;}
         <span class="dot"></span><span data-i18n="hide"></span>
       </button>
     </div>
+  </div>
+</section>
+
+<section class="registry-actions reveal">
+  <a href="https://www.amazon.fr/hz/wishlist/ls/3RQXZQXRAVR0N?ref_=wl_share" target="_blank" rel="noopener noreferrer" class="amazon-list-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><polyline points="9 11 12 14 22 4"/><path d="M21 15v5a2 2 0 0 1-2 2H7"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+    Voir la liste complète sur Amazon
+  </a>
+  <div class="urne-notice">
+    <div class="urne-icon">💌</div>
+    <div class="urne-text">Une <strong>urne</strong> sera présente le jour J pour les enveloppes — chaque contribution participera à notre voyage de noces. Merci du fond du cœur !</div>
   </div>
 </section>
 
